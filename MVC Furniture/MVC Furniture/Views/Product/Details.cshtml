@@ -1,0 +1,33 @@
+﻿@model MVC_Furniture.Models.Furniture
+@using MVC_Furniture.Models;
+
+@{
+    ViewBag.Title = $"Info om {Model.Title}";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Shows information on specific items when click on image-->
+<h2>@Model.Title</h2>
+<h3>@Model.Price $</h3>
+@if (Model is Couch)
+{
+    var couch = (Couch)Model;
+    
+    <p>Seats: @couch.Seats</p>
+    <p>Colour: @couch.Colour</p>
+
+}
+else  if (Model is Desk)
+{
+    var desk = (Desk)Model;
+    <p>Draws: @desk.Draws</p>
+    <p>Design:@desk.Design</p>
+}
+else if (Model is BookShelf)
+{
+    var shelf = (BookShelf)Model;
+    <p>Shelves: @shelf.Shelves</p>
+    <p>Height: @shelf.Height</p>
+}
+@Html.ActionLink("Back", "Index", "Home")
+
+

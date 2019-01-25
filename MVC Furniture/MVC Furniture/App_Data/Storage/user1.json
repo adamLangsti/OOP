@@ -1,0 +1,19 @@
+{
+  "$type": "MVC_Furniture.Models.UserData, MVC Furniture",
+  "Id": 1,
+  "Name": "Adam Lang",
+  "Email": "Adam.Lang-1@hotmail.com",
+  "Password": "hejsan",
+  "KundvagnList": [
+    {
+      "$type": "MVC_Furniture.Models.UserData+Kundvagn, MVC Furniture",
+      "Id": 4,
+      "ReturnDate": "2019-02-22T11:55:31.9908345+01:00"
+    },
+    {
+      "$type": "MVC_Furniture.Models.UserData+Kundvagn, MVC Furniture",
+      "Id": 5,
+      "ReturnDate": "2019-02-22T11:55:36.479098+01:00"
+    }
+  ]
+}

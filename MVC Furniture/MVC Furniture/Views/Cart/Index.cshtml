@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Payment</h2>
+<!--Adds all products in shoppingcart and gives summary on total cost-->
+@if (Model.UserData.KundvagnList != null)
+{
+    var sum = 0;
+    foreach (var kundvagn in Model.UserData.KundvagnList)
+    {
+        foreach (var furniture in Model.FurnitureList)
+        {
+            if (kundvagn.Id == furniture.Id)
+
+
+            {
+                sum += furniture.Price;
+                <p>@furniture.Title : @furniture.Price $</p>
+
+            }
+        }
+    }
+    <p>Total cost: @(sum)$</p>
+}
+

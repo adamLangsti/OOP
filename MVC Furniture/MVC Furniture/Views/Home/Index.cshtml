@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Person that is logged in on site-->
+<h3 class=" loggedin">Logged in as : @Model.UserData.Name</h3>
+
+
+
+
+<table class="table">
+
+    <tr>
+        <th>Title</th>
+        <th>Home delivery</th>
+        <th>Items left</th>   
+        <th>Price</th>
+        <th>Information</th>
+        
+    </tr>
+
+    @foreach (var furniture in Model.FurnitureList)
+    {
+    <tr>
+
+         <!--Links images to product-->
+
+        <td><a href="@Url.Action("Details","Product", new {id = furniture.Id})"><img class="product-img" src='~/Pics/@(furniture.Title+".jpg")' /><br />@furniture.Title</a></td>
+        <td>@furniture.Delivery</td>
+        <td>@furniture.Count</td>
+        <td>@furniture.Price$</td>
+
+        <!--Creates loop that give mutual products unique traits-->
+
+        @if (furniture is MVC_Furniture.Models.Couch)
+        {
+            <td>
+                Seats: @(((MVC_Furniture.Models.Couch)furniture).Seats)
+                Colour: @(((MVC_Furniture.Models.Couch)furniture).Colour)
+            </td>
+
+        }
+
+
+        @if (furniture is MVC_Furniture.Models.Desk)
+        {
+            <td>
+                Draws: @(((MVC_Furniture.Models.Desk)furniture).Draws)
+                Design @(((MVC_Furniture.Models.Desk)furniture).Design)
+
+            </td>
+        }
+        @if (furniture is MVC_Furniture.Models.BookShelf)
+        {
+            <td>
+                Height: @(((MVC_Furniture.Models.BookShelf)furniture).Height)
+                Shelves: @(((MVC_Furniture.Models.BookShelf)furniture).Shelves)
+            </td>
+        }
+        <td>
+            @if (furniture.Count > 0)
+            {
+                <a href="~/Home/Buy/@furniture.Id">Buy</a>
+            }
+        </td>
+        <td>
+            @if (furniture.Count < furniture.InitialCount)
+            {
+                <a href="~/Home/RemoveCount/@furniture.Id" class=" return">Remove</a>
+            }
+        </td>
+    </tr>   
+       
+    }
+        
+</table>
+
+<h3 class=" shopcart">Shoppingcart: </h3>
+
+<!--Class that gathers chosen products in shoppingcart-->
+<div class=" Kundvagnen">
+<a href="@Url.Action("Index", "Cart")" class= "button">Payment</a>
+    @if (Model.UserData.KundvagnList != null)
+    {
+        foreach (var kundvagn in Model.UserData.KundvagnList)
+        {
+            foreach (var furniture in Model.FurnitureList)
+            {
+                if (kundvagn.Id == furniture.Id)
+                {
+                    <p>@furniture.Title : @furniture.Price $</p>
+                  
+                }
+            }
+        }
+    }
+</div>
+
